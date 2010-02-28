@@ -62,7 +62,7 @@ class IRCConsole(InteractiveConsole):
             self.engine.signals['outgoing_msg'].emit(
                 self.engine.ircconf.helpchannel,
                 # TODO: Change with config.
-                'Output too long : http://vector.ics-il.com:8080/#%s' % newrec.storeID
+                'Output too long : http://ldlework.com:8080/#%s' % newrec.storeID
             )
         self._ibuffer = []
         self._obuffer = []
