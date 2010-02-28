@@ -3,6 +3,8 @@ from twisted.words.protocols.irc import IRCClient, DccChat
 from twisted.internet import reactor, protocol
 from twisted.python.log import msg as log, err
 
+import chardet
+
 from lib import db, event, engine
 
 class IRCBot(IRCClient):
@@ -15,10 +17,28 @@ class IRCBot(IRCClient):
         IRCClient.sendLine(self, str(line))
         
     def dataReceived(self, data):
-        try:
-            data = unicode( data )
-        except: pass
-        IRCClient.dataReceived(self, data)
+        encoding = chardet.detect(data)['encoding']
+        udata = data.decode(encoding)
+        IRCClient.dataReceived(self, udata)
+        
+    def handleCommand(self, command, prefix, params):
+        print command, prefix, params
+        IRCClient.handleCommand(self, command, prefix, params)
+        
+    def irc_unknown(self, prefix, command, params):
+        print prefix, command, params
+        IRCClient.irc_unknown(self, prefix, command, params)
+        
+    def irc_RPL_WHOISUSER(self, prefix, params):
+        print "WHOIS INFORMATION", params
+        nickname = params[1].strip("~")
+        if self.engine.is_admin(nickname):
+            print nickname, 'is authed.'
+            self.admins.add(nickname)
+        elif len(self.engine.admins()) == 0:
+            self.admins.add(nickname)
+            self.engine.make_admin(nickname)
+            print nickname, 'is authed.'
         
     # Initialization
     def connectionMade(self):
@@ -52,16 +72,29 @@ class IRCBot(IRCClient):
         print "Whoising %s" % nick
         self.sendLine('WHOIS %s' % nick)
     
-    def irc_320(self, prefix, params):
+    def irc_330(self, prefix, params):
         print "WHOIS INFORMATION", params
-        if params[2].startswith(u'is signed on'):
-            return
-        elif params[2].startswith(u'is identified'):
+        if 'is logged in as' in params or self.engine.is_admin(params[1]):
             print params[1], 'is authed.'
             self.admins.add(params[1])
-        elif params[1] in self.admins:
-            print params[1], 'isnt authed.'
-            self.admins.remove(params[1])
+        elif len(self.engine.admins()) == 0:
+            self.admins.add(params[1])
+            self.engine.make_admin(params[1])
+            print params[1], 'is authed.'
+            
+    def irc_320(self, prefix, params):
+        return irc_330(prefix, params)
+    
+    def irc_311(self, prefix, params):
+        print "WHOIS INFORMATION", params
+        nickname = params[0].strip("~")
+        if self.engine.is_admin(nickname):
+            print nickname, 'is authed.'
+            self.admins.add(nickname)
+        elif len(self.engine.admins()) == 0:
+            self.admins.add(nickname)
+            self.engine.make_admin(nickname)
+            print nickname, 'is authed.'
 
     def userRenamed(self, oldname, newname):
         if oldname in self.admins:

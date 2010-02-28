@@ -26,7 +26,7 @@ class IRCConsole(InteractiveConsole):
         self._stdout = sys.stdout
         self._ibuffer = [] #Parts of a statement
         self._obuffer = [] #Lines of output
-        InteractiveConsole.__init__(self)
+        InteractiveConsole.__init__(self, {'engine': self.engine})
         
     def write(self, data):
         "Makes this file-like. Doesn't write empty strings."
