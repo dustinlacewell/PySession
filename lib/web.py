@@ -41,7 +41,8 @@ class RecordPage(rend.Page):
 
     def render_record(self, record):
         t = (record.year, record.month, record.day, record.hour, record.minute)
-        t = Time.fromStructTime([part for part in t if part])
+        print "*"*80, t
+        t = Time.fromStructTime(t)
         t = t.asISO8601TimeAndDate().replace('T', ' ')
         t = t.replace(':00+00:00','')
     
