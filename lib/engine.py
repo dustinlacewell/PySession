@@ -32,9 +32,10 @@ class IRCConsole(InteractiveConsole):
         "Makes this file-like. Doesn't write empty strings."
         lines = data.split('\n')
         for line in lines:
-            cline = line.strip()
-            if cline: 
-                self._obuffer.append(cline)
+            if cline != '\n':
+                cline = line.strip()
+                if cline: 
+                    self._obuffer.append(cline)
 
     def flush(self):
         "Flushes internal buffer to web and irc services."
@@ -70,8 +71,7 @@ class IRCConsole(InteractiveConsole):
     def writelines(self, lines):
         "Makes this file-like."
         for l in lines:
-            cl = l.strip()
-            if cl:
+            if cl != '\n':
                 self.write(cl)
         
     def push(self, line):
