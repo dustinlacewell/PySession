@@ -74,27 +74,30 @@ class IRCBot(IRCClient):
     
     def irc_330(self, prefix, params):
         print "WHOIS INFORMATION", params
-        if 'is logged in as' in params or self.engine.is_admin(params[1]):
-            print params[1], 'is authed.'
-            self.admins.add(params[1])
-        elif len(self.engine.admins()) == 0:
-            self.admins.add(params[1])
-            self.engine.make_admin(params[1])
-            print params[1], 'is authed.'
+        if 'is logged in as' in params:
+            if self.engine.is_admin(params[1]):
+                print params[1], 'is authed.'
+                self.admins.add(params[1])
+            elif len(self.engine.admins()) == 0:
+                self.admins.add(params[1])
+                self.engine.make_admin(params[1])
+                print params[1], 'is authed.'
             
     def irc_320(self, prefix, params):
         return irc_330(prefix, params)
     
-    def irc_311(self, prefix, params):
-        print "WHOIS INFORMATION", params
-        nickname = params[0].strip("~")
-        if self.engine.is_admin(nickname):
-            print nickname, 'is authed.'
-            self.admins.add(nickname)
-        elif len(self.engine.admins()) == 0:
-            self.admins.add(nickname)
-            self.engine.make_admin(nickname)
-            print nickname, 'is authed.'
+    #===========================================================================
+    # def irc_311(self, prefix, params):
+    #    print "WHOIS INFORMATION", params
+    #    nickname = params[0].strip("~")
+    #    if self.engine.is_admin(nickname):
+    #        print nickname, 'is authed.'
+    #        self.admins.add(nickname)
+    #    elif len(self.engine.admins()) == 0:
+    #        self.admins.add(nickname)
+    #        self.engine.make_admin(nickname)
+    #        print nickname, 'is authed.'
+    #===========================================================================
 
     def userRenamed(self, oldname, newname):
         if oldname in self.admins:

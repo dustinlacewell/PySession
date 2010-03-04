@@ -11,10 +11,10 @@ class IRCConfig( item.Item ):
     typeName = 'IRCConfig'
     schemaVersion = 1
 
-    network = attributes.text(default = u'irc.quakenet.org')
+    network = attributes.text(default = u'irc.freenode.org')
     port = attributes.text(default = u'6667')
     
-    helpchannel = attributes.text(default = u'#ffffff')
+    helpchannel = attributes.text(default = u'#chipy')
     channelpass = attributes.text(default = u'mdcclxxvi')
     
     nickname = attributes.text(default = u'TheSession')
