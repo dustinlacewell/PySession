@@ -32,6 +32,14 @@
     margin-left: .6em;
 }
 
+.left-col .hint {
+    font-size: .8em;
+    color: grey;
+    text-align: center;
+    margin-top: 1.3em;
+}
+    
+
 .chat-bubble {
   background-color:#EDEDED;
   border:2px solid #666666;
