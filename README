@@ -62,12 +62,12 @@ Installation:
 
 Bot Management:
 
-Once the bot has signed into NickServ and joined the channel its
-configured for you will want to loginto NickServ yourself and go into
-the channel with the bot. Since the bot knows no whitelisted nicks,
-you will imprint into the bot with the ident command:
+Once the bot has signed into NickServ and joined the channel, you will
+want to log into NickServ yourself and go into the channel with the
+bot. Since the bot has no whitelisted nicks, you will imprint into the
+bot with the first ident command:
 
-  <ldlework>: .idet
+  <ldlework>: .ident
 
 Check that you have succssfully gained whitelist membership:
 
