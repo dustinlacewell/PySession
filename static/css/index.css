@@ -15,8 +15,16 @@
     float: left;
 }
 
+.left-col h1 {
+    margin-left: .3em;
+}
+
 .left-col p {
     margin: .6em;
+}
+
+.left-col a {
+    margin-left: .6em;
 }
 
 .chat-bubble {
@@ -63,7 +71,7 @@
 }
 
 .right-col .snippit {
-    font-size: .6em;
+    font-size: 1em;
 }
 
 .right-col .snippit .info {
