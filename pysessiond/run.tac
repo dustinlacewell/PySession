@@ -12,7 +12,7 @@ from pysession import settings
 setup_environ(settings)
 
 from twisted.application import service
-from lib import engine, irc, web
+from lib import engine, irc
 
 from irc.models import Configuration
 

@@ -2,12 +2,9 @@ from cStringIO import StringIO
 from code import InteractiveConsole
 import sys, traceback
 
-from axiom.store import Store
-from axiom.attributes import AND, OR
 from twisted.python.log import msg as log, err
 from twisted.application.service import IService, IServiceCollection
 from twisted.internet import reactor
-from epsilon.extime import Time
 
 from redent import redent
 

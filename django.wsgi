@@ -2,6 +2,10 @@ import os
 import sys
 
 path = '/var/www/pysession'
+os.chdir(path)
+if path not in sys.path:
+    sys.path.append(path)
+path = '/var/www'
 if path not in sys.path:
     sys.path.append(path)
 
