@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.db.models.signals import post_syncdb
 
 from pysession.settings import IRC_CHANNEL
 
@@ -27,3 +28,11 @@ class Configuration(models.Model):
     def get(cls):
         return Configuration.objects.get(pk=1)
 
+def init_configuration(sender, app, *args, **kwargs):
+    if sender.__name__ == __name__:
+        conf = Configuration()
+        conf.channel = IRC_CHANNEL
+        conf.save()
+        print conf, "SAVED"
+
+post_syncdb.connect(init_configuration)
