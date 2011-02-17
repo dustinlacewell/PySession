@@ -241,7 +241,7 @@ class EngineClass(object):
     #  User Queries #
     def admins(self):
         """ Returns a list of admin nicks """
-        return [u.username for u in User.objects.filter(groups__name="Moderator")]
+        return [u.username for u in User.objects.filter(is_superuser=False, is_staff=True)]
     
     def is_admin(self, nickname):
         """ Return whether nickname is an admin """
@@ -250,29 +250,24 @@ class EngineClass(object):
     def set_channel(self, channel):
         self.ircconf.channel = channel
         self.ircconf.save()
-        print "**********", self.ircconf.channel
 
     def get_user(self, nickname):
         user, new = User.objects.get_or_create(username=nickname)
         if new:
-            user.save()
-            Group.objects.get(name="Moderator").user_set.add(user)
             user.password = "changeme"
+            user.is_staff = True
             user.save()
         return user
-            
         
     def make_admin(self, nickname):
         u = self.get_user(nickname)
         u.is_staff = True
         u.save()
-        g = Group.objects.get(name="Moderator").user_set.add(u)
         
     def remove_admin(self, nickname):
         u = self.get_user(nickname)
         u.is_staff = False
         u.save()
-        Group.objects.get(name="Moderator").user_set.remove(u)
         
     def temp_admin(self, nickname):        
         self.make_admin(nickname)
