@@ -1,12 +1,11 @@
 PySession
 
 PySession is a Django/Twisted-daemon combo. A managed IRC bot allows
-whitelisted user to execute python interactively in chat. If the
+whitelisted users to execute python interactively in chat. If the
 output is not too long it will be displayed in the chat. Otherwise a
 link is provided to the Django based pastebin. The pastebin can also
 be used publicialy via the web interface, however it does not feature
 code execution.
-
 
 Dependencies:
 
@@ -18,8 +17,7 @@ Dependencies:
 
 Installation:
 
-Checkout the PySession source into your web-directory:
-
+  #Checkout the PySession source into your web-directory:
   cd /var/www
   git clone git://github.com/dustinlacewell/PySession.git pysession
 
