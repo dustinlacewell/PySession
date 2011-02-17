@@ -1,0 +1,6 @@
+*.pyc
+*~
+\#*\#
+!.gitignore
+localsettings.py
+
