@@ -1,0 +1,120 @@
+#header {
+    border-bottom: 6px solid grey;
+    padding: .3em 0em;
+    font-size: 1.2em;
+    font-family: monospace;
+    font-weight: boldest;
+    text-shadow: 0px 1px 1px grey;
+}
+
+#header #logo {
+    padding-left: 1.8em;
+}
+
+#header #menu { 
+    list-style-type: none; 
+    float: right;
+    font-size: .8em;
+}
+
+#header #menu li {
+    margin-right: 1em;
+}
+
+#header a {
+    text-decoration: none;
+}
+
+#header a:hover{
+    color: black;
+}
+
+#body {
+    border-bottom: 6px solid grey;
+    background-color: grey;
+}
+
+.content{ 
+    border-radius: 15px;
+    border-left: 1px solid lightgray;
+    border-bottom: 1px solid darkgrey;
+    background-color: #F5F8FA;    
+}
+
+.content {
+    padding: .5em;
+}
+
+.content h1 {
+    font-family: Verdana, sans-serif, monospace;
+    font-size: 1.8em;
+    padding: .2em;
+    padding-left: 0em;
+    font-weight: bolder;
+    color: grey;
+    text-shadow: 0px 1px 1px darkgrey;
+}
+
+.content textarea {
+    font-family: monospace;
+    font-size: 1em;
+    text-shadow: 0px 0px 0px;
+    padding: .3em;
+}
+
+.content button {
+    width: 5em;
+}
+
+.info {
+    font-size:.6em;
+    font-family: monospace;
+    background-color: #F5F8FA;
+    padding: 3px;
+    padding-left: 1.3em;
+    display: inline-block;
+}
+
+.info a {
+    text-decoration: none;
+}
+
+.info a:hover {
+    color: black;
+}
+
+.syntax, .plain{ 
+    padding: .5em;
+    border-bottom: 1px solid lightgray; 
+    border-top: 1px solid lightgray;
+    margin-bottom: -.7em;
+}
+
+.syntax {
+    font-size: 1.3em; 
+    font-family: sans-serif;
+}
+
+.plain {
+    font-size: 1em; 
+    font-weight: normal;
+}
+
+.result {
+    padding: 1em;
+    font-weight: bold;
+    font-family: monospace;
+    background-color: #F5F8FA;
+}
+
+.paste button {
+    margin-right: 1em;
+}
+
+.paste label {
+    font-size: 1em;
+    font-family: monospace;
+    text-shadow: 0px 1px 1px black;
+    display: inline-block;
+    padding-right: 1em;
+}

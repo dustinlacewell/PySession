@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load render %}
+{% block styles %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/index.css" />
+{% endblock %}
+
+{% block body %}
+<div class="content">
+  <div class="chat-bubble">
+    <div class="chat-bubble-arrow-border"></div>
+    <div class="chat-bubble-arrow"></div>
+    Make a new paste here!
+  </div>
+  <div class="index">
+    <div class="left-col">
+      <h1>PySession!</h1>
+      <p>Yes, another Python pastebin.</p>
+      <p>But PySession is more than just a pastebin! You can currently find it in
+{{ IRC_CHANNEL }} on {{ IRC_NETWORK }} where you will ocassionally see people
+typing Python directly into the channel.</p>
+      <p>Depending on the length, {{ IRC_NICKNAME }} will output the result or a
+link to this pastebin to the channel. Unless you are really cool with the ops
+there you probably wont get access to the Python REPL features in IRC, but - !
+You can feel free to use this lovely site for all your Python pasting needs
+:)</p>
+    </div>
+    <div class="right-col">
+      <div class="snippits">
+	{% for snippit in snippits %}
+	<div class="snippit">
+	  <p class="info">
+	    <a href="{{ snippit.pk }}">
+	      <span class="time">{{ snippit.timestamp }}</span>
+	      {% if snippit.nickname %}
+	      by <span class="nickname">{{ snippit.nickname }}</span>
+	      {% endif %}
+	      {% if snippit.channel %}
+	      in <span class="channel">{{ snippit.channel }}</span>
+	      {% endif %}
+	    </a>
+	  </p>
+	  {% if snippit.highlight %}<pre>{{ snippit.code|render|safe }}</pre>
+	  {% else %}<pre><div class="plain">{{ snippit.code }}</div></pre>
+	  {% endif %}
+	  <pre class="result">{{ snippit.result }}</pre>
+	</div>
+	{% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

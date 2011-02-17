@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load render %}
+
+{% block body %}
+<div class="snippit">
+<div class="content">
+<p class="info">
+<a href="{{ snippit.pk }}">
+<span class="time">{{ snippit.timestamp }}</span>
+{% if snippit.nickname %}
+by <span class="nickname">{{ snippit.nickname }}</span>
+{% endif %}
+{% if snippit.channel %}
+in <span class="channel">{{ snippit.channel }}</span>
+{% endif %}
+</a>
+</p>
+{% if snippit.highlight %}<pre>{{ snippit.code|render|safe }}</pre>
+{% else %}<pre><div class="plain">{{ snippit.code }}</div></pre>
+{% endif %}
+<pre class="result">{{ snippit.result }}</pre>
+</div>
+</div>
+{% endblock %}
+

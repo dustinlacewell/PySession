@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" xml:lang="{{ LANGUAGE_CODE }}">
+    <head >
+        <title>PySession : {% block title %}{% endblock %}</title>
+        <!--[if IE]>
+            <style>
+                div { zoom: 1; /* trigger hasLayout */ }
+            </style>
+        <![endif]-->
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/tango.css" />
+        <script src="http://code.jquery.com/jquery-1.4.3.js" type="text/javascript"></script>
+<script type="text/javascript">
+function pageX(elem) {
+    var offset = elem.position();
+    var parent = elem.parent()[0];
+    return parent & offset ? (offset.left + pageX(parent)) : offset.left;
+}
+function pageY(elem) {
+    var offset = elem.position();
+    var parent = elem.parent()[0];
+    return parent & offset ? (offset.top + pageY(parent)) : offset.top;
+}
+
+function resizePageContent() {
+    var content = $('.content');
+    var height = document.documentElement.clientHeight;
+    var y = pageY(content);
+    height -= y + 24;
+    console.log(y);
+    height = (height < 0) ? 0 : height;
+    content.css('min-height', height);
+}
+
+function adjust_dom() {
+    resizePageContent();
+}
+		      
+window.onload= adjust_dom;
+window.onresize = adjust_dom;
+</script>		    
+	
+        {% block styles %}{% endblock %}
+        {% block scripts %}{% endblock %}
+        {% block extra_head %}{% endblock %}
+    </head>
+
+    <body>
+        <div id="header">
+	  <span id="logo">-  Pysession  -</span>
+	  <ol id="menu">
+	    <li id="new"><a href="/new/">New Paste</a> |</li>
+	   </ol>
+        </div>
+        
+        <div id="body" >
+        {% block body %}
+        {% endblock %}
+        </div>
+        
+        <div id="footer">
+        {% block footer %}
+        {% endblock %}
+        </div>
+    </body>
+</html>
