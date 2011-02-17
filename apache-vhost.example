@@ -1,0 +1,17 @@
+<VirtualHost 65.182.165.31:80>
+    ServerAdmin yourname@example.com
+    ServerName subdomain.example.com
+    DocumentRoot /var/www/pysession
+
+    Alias /media/ /var/www/pysession/media/
+    Alias /static/ /var/www/pysession/static/
+
+    WSGIScriptAlias / /var/www/pysession/django.wsgi
+    WSGIDaemonProcess subdomain.example.com user=www-data group=www-data
+
+    <Location />
+        Order allow,deny
+	Allow from all
+    </Location>
+
+</VirtualHost>

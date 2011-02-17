@@ -1,0 +1,97 @@
+PySession
+
+PySession is a Django/Twisted-daemon combo. A managed IRC bot allows
+whitelisted user to execute python interactively in chat. If the
+output is not too long it will be displayed in the chat. Otherwise a
+link is provided to the Django based pastebin. The pastebin can also
+be used publicialy via the web interface, however it does not feature
+code execution.
+
+
+Dependencies:
+
+  Python 2.5
+  Twisted 8.1
+  Django 1.3.0 b1
+  chardet
+  Pygments
+
+Installation:
+
+Checkout the PySession source into your web-directory:
+
+  cd /var/www
+  git clone git://github.com/dustinlacewell/PySession.git pysession
+
+  # link django admin media to right place
+  cd pysession/static/
+  ls -s /usr/lib/python2.5/site-packages/django/contrib/admin/media/ admin
+
+  # setup local_settings.py
+  cd ../
+  cp local_settings.example local_settings.py
+  emacs local_settings.py
+
+  [... edit local_settings.py accordingly ...]
+
+  # setup apache virtual host
+  cp apache-vhost.example /etc/apache2/sites-available/pysession
+  emacs /etc/apache2/sites-available/pysession
+
+  [... edit pysession vhost accordingly ...]
+
+  # Sync the database
+  python manage.py syncdb
+
+  [... setup administrative user ...]
+
+  # give apache rights to things
+  chown -R www-data:www-data static/
+  chown -R www-data:www-data media/
+  # if using sqlite
+  chown www-data:www-data database.sql
+
+  # enable the vhost
+  a2ensite pysession
+  /etc/init.d/apache2 restart
+
+  # Try out the site!
+  http://subdomain.example.com/
+  
+  # Start the python bot
+  cd pysessiond/
+  twistd -noy run.tac
+
+Bot Management:
+
+Once the bot has signed into NickServ and joined the channel its
+configured for you will want to loginto NickServ yourself and go into
+the channel with the bot. Since the bot knows no whitelisted nicks,
+you will imprint into the bot with the ident command:
+
+  <ldlework>: .idet
+
+Check that you have succssfully gained whitelist membership:
+
+  <ldlework>: .admins
+  <TheSession>: [ldlework]
+
+Bot Commands:
+
+  .ident		# get the bot to notice you
+  .admins		# print the whitelist
+
+  .timeout <seconds>	# how long temp whitelisted members last for
+  .mktmp <nickname>	# add nickname to whitelist temporarily
+  .mkadmin <nickname>	# permanently add nickname ot whitelist
+  .rmadmin <nickname>	# remove a nickname from the whitelist
+  .move <channel>	# move bot to named channel
+  .home			# return bot to local_settings.py channel
+
+  .reset		# reset repl environment (globals, locals, etc)
+
+  .redent <python code> # execute python code written on one line
+
+  >>><python code>
+  ...<python code>	# Multiline python code
+  ...	     		# empty line to finish block
