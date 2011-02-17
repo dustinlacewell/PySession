@@ -2,7 +2,7 @@
 }
 
 .index {
-    padding: 2em;
+    padding: 10px;
 }
 
 .left-col {
@@ -66,8 +66,8 @@
 }
 
 .right-col {
-    width: 50%;
-    padding-left: 40%;
+    width: 60%;
+    padding-left: 35%;
 }
 
 .right-col .snippit {
