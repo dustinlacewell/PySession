@@ -11,7 +11,6 @@ from epsilon.extime import Time
 
 from redent import redent
 
-from lib import db
 from lib.event import Signal
 
 from django.contrib.auth.models import User, Group
@@ -124,16 +123,6 @@ class IRCConsole(InteractiveConsole):
         snippit.code = redent(str("\n".join(self._ibuffer)))
         snippit.result = unicode("\n".join(self._obuffer))
         snippit.save()
-
-        # newrec = db.Record(store=self.engine.database,
-        #         year = dob[0],
-        #         month = dob[1],
-        #         day = dob[2],
-        #         hour = dob[3],
-        #         minute = dob[4],
-        #         inlines = unicode("\n".join(self._ibuffer)),
-        #         outlines = unicode("\n".join(self._obuffer))
-        #         )
 
         # Less than four lines
         if len(self._obuffer) <= 4:

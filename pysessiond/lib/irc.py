@@ -5,7 +5,7 @@ from twisted.python.log import msg as log, err
 
 import chardet
 
-from lib import db, event, engine
+from lib import event, engine
 
 from pysession.settings import *
 

@@ -75,3 +75,12 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+IRC_NETWORK = "irc.freenode.net" # only Freenode is supported (NickServ)
+IRC_PORTS = (6667, )
+IRC_NICKNAME = "BotNickname" # Must be registered with NickServ
+IRC_PASSWORD = "B0tPa55w0rd" # NickServ password
+
+IRC_CHANNEL = "#pysession"
+IRC_CHANPASS = ""
+
+SITE_DOMAIN = "localhost:8000"
