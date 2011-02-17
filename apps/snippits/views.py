@@ -24,7 +24,6 @@ def paste(request):
 	if form.is_valid():
 	    snippit = form.save()
             reindent = request.POST.get('reindent', False)
-            print "***", reindent
             if reindent:
                 snippit.code = redent(snippit.code)
                 snippit.save()

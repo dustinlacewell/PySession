@@ -5,6 +5,11 @@
     padding: 10px;
 }
 
+.emph {
+    color: #75428A;
+    font-style: italic;
+}
+
 .left-col {
     width: 30%;
     border-radius: 15px;
